@@ -16,3 +16,5 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('/dbConnection', [\App\Http\Controllers\DatabaseConnectionController::class, 'index']);
