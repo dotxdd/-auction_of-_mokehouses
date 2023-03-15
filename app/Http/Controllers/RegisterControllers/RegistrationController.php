@@ -28,14 +28,52 @@ class RegistrationController
            'name' => $data['name'],
            'phone_number' => $data['telephone'],
            'email' => $data['email'],
-           'password' => Hash::make('password'),
+           'password' =>Hash::make($data['password']),
            'role' => 1
        ]);
        return redirect('login')->with('success', 'registration complete!');
    }
+    function validate_login(Request $request)
+    {
+        $request->validate([
+            'email' =>  'required',
+            'password'  =>  'required'
+        ]);
 
-    function logout(){
 
+        $credentials = $request->only('email', 'password');
+        if (!Auth::attempt($credentials)){
+            return redirect()->to('login')
+                ->with(trans('warning','Not valid credentials'));
+        }
+//        if(Auth::attempt($credentials))
+//        {
+//            dd($credentials);
+//
+//        }
+        $user=Auth::getProvider()->retrieveByCredentials($credentials);
+
+        Auth::login($user);
+        return redirect('dashboard');
+    }
+
+    function dashboard()
+    {
+        if(Auth::check())
+        {
+            return view('dashboard');
+        }
+
+        return redirect('login')->with('success', 'you are not allowed to access');
+    }
+
+    function logout()
+    {
+        Session::flush();
+
+        Auth::logout();
+
+        return Redirect('login');
     }
 
 }

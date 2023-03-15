@@ -18,12 +18,15 @@ Route::get('/', function () {
 });
 Route::get('/dbConnection', [\App\Http\Controllers\DatabaseConnectionController::class, 'index']);
 
-Route::controller(RegistrationController::class)->group(function(){
+Route::controller(RegistrationController::class)->group(function() {
     Route::get('login', 'index')->name('login');
     Route::get('registration', 'registration')->name('registration');
     Route::get('logout', 'logout')->name('logout');
     Route::post('validate_registration', 'validate_registration')->name('validate_registration');
-});
-Route::get('/register', function () {
-    return view('auth.register');
-})->name('register');
+    Route::post('validate_login', 'validate_login')->name('validate_login');
+    Route::post('/logout', 'logout')->name('logout');
+
+    Route::view('/dashboard', 'auth.dashboard')->name('dashboard');
+}); // remove this extra `}`
+
+
