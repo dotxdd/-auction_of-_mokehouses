@@ -27,6 +27,7 @@ Route::controller(RegistrationController::class)->group(function() {
     Route::post('/logout', 'logout')->name('logout');
 
     Route::view('/dashboard', 'auth.dashboard')->name('dashboard');
-}); // remove this extra `}`
+});
+Route::view('/terms-of-use','terms.terms_of_use')->name('terms-of-use');
 
 
