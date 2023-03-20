@@ -82,7 +82,7 @@
                                 <div class="ml-3 text-sm">
                                     <label for="terms" class="font-light text-gray-500 dark:text-gray-300">I accept the
                                         <a class="font-medium text-primary-600 hover:underline dark:text-primary-500"
-                                           href="#">Terms and Conditions</a></label>
+                                           href="{{route('terms-of-use')}}">Terms and Conditions</a></label>
                                 </div>
                             </div>
                             <button type="submit"
@@ -90,7 +90,7 @@
                                 Create an account
                             </button>
                             <p class="text-sm font-light text-gray-500 dark:text-gray-400">
-                                Already have an account? <a href="#"
+                                Already have an account? <a href="{{route('login')}}"
                                                             class="font-medium text-primary-600 hover:underline dark:text-primary-500">Login
                                     here</a>
                             </p>
