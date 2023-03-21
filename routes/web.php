@@ -15,7 +15,7 @@ use App\Http\Controllers\RegisterControllers\RegistrationController;
 
 Route::get('/', function () {
     return view('welcome');
-});
+})->name('welcome.page');
 Route::get('/dbConnection', [\App\Http\Controllers\DatabaseConnectionController::class, 'index']);
 
 Route::controller(RegistrationController::class)->group(function() {
@@ -29,5 +29,7 @@ Route::controller(RegistrationController::class)->group(function() {
     Route::view('/dashboard', 'auth.dashboard')->name('dashboard');
 });
 Route::view('/terms-of-use','terms.terms_of_use')->name('terms-of-use');
+Route::view('/contact','menu.contact')->name('contact');
+Route::view('/team','menu.team')->name('team');
 
 
