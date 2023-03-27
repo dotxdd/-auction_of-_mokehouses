@@ -4,6 +4,7 @@ namespace App\Http\Controllers\RegisterControllers;
 use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Auth;
 class RegistrationController
@@ -31,6 +32,14 @@ class RegistrationController
            'password' =>Hash::make($data['password']),
            'role' => 1
        ]);
+       $email=$data['email'];
+       $name=$data['name'];
+       Mail::send('mails.register_mail',  $data, function($message) use ($email,$name){
+           $message
+               ->from(config('mail.from.address'), config('mail.from.name'))
+               ->to($email, $name)
+               ->subject('Account has been created');
+       });
        return redirect('login')->with('success', 'registration complete!');
    }
     function validate_login(Request $request)
