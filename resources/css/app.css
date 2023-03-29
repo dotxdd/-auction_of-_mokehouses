@@ -50,3 +50,10 @@
     border-radius: 5px;
 
 }
+
+#myProgress {
+    width: 1%;
+    background-color: white;
+}
+
+
