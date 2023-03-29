@@ -49,20 +49,17 @@ class RegistrationController
             'password'  =>  'required'
         ]);
 
-
         $credentials = $request->only('email', 'password');
-        if (!Auth::attempt($credentials)){
-            return redirect()->to('login')
-                ->with(trans('warning','Not valid credentials'));
-        }
-//        if(Auth::attempt($credentials))
-//        {
-//            dd($credentials);
-//
-//        }
-        $user=Auth::getProvider()->retrieveByCredentials($credentials);
+        $remember = $request->has('remember') ? true : false; // Check if the "Remember Me" checkbox is checked
 
-        Auth::login($user);
+        if (!Auth::attempt($credentials, $remember)) {
+            return redirect()->to('login')
+                ->with('warning', trans('Not valid credentials'));
+        }
+
+        $user = Auth::getProvider()->retrieveByCredentials($credentials);
+
+        Auth::login($user, $remember);
         return redirect('dashboard');
     }
 
