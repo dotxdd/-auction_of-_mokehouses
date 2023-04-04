@@ -18,6 +18,7 @@ class ProductCompaniesTable extends Migration
             $table->string('company_name');
             $table->string('email')->nullable();
             $table->string('phone')->nullable();
+            $table->string('tax_payer_number')->nullable()->unique();
             $table->timestamps();
         });
     }

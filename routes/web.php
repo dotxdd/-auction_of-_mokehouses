@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\RegisterControllers\RegistrationController;
+use App\Http\Controllers\ProductCompanyController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -31,5 +32,8 @@ Route::controller(RegistrationController::class)->group(function() {
 Route::view('/terms-of-use','terms.terms_of_use')->name('terms-of-use');
 Route::view('/contact','menu.contact')->name('contact');
 Route::view('/team','menu.team')->name('team');
-
+Route::middleware(['admin'])->group(function () {
+    Route::get('/admin/product-companies', [ProductCompanyController::class, 'index'])->name('admin.product-companies');
+    Route::post('/product-companies', [ProductCompanyController::class, 'store'])->name('product-companies.store');
+});
 
