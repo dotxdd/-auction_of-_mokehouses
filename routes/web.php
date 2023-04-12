@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\RegisterControllers\RegistrationController;
 use App\Http\Controllers\ProductCompanyController;
+use App\Http\Controllers\ProductController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -35,5 +36,7 @@ Route::view('/team','menu.team')->name('team');
 Route::middleware(['admin'])->group(function () {
     Route::get('/admin/product-companies', [ProductCompanyController::class, 'index'])->name('admin.product-companies');
     Route::post('/product-companies', [ProductCompanyController::class, 'store'])->name('product-companies.store');
+    Route::get('/admin/products', [ProductController::class, 'index'])->name('admin.products');
+    Route::post('/products', [ProductController::class, 'store'])->name('products.store');
 });
 
