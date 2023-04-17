@@ -30,13 +30,17 @@ Route::controller(RegistrationController::class)->group(function() {
 
     Route::view('/dashboard', 'auth.dashboard')->name('dashboard');
 });
-Route::view('/terms-of-use','terms.terms_of_use')->name('terms-of-use');
-Route::view('/contact','menu.contact')->name('contact');
-Route::view('/team','menu.team')->name('team');
+Route::view('/terms-of-use', 'terms.terms_of_use')->name('terms-of-use');
+Route::view('/contact', 'menu.contact')->name('contact');
+Route::view('/team', 'menu.team')->name('team');
+
 Route::middleware(['admin'])->group(function () {
-    Route::get('/admin/product-companies', [ProductCompanyController::class, 'index'])->name('admin.product-companies');
-    Route::post('/product-companies', [ProductCompanyController::class, 'store'])->name('product-companies.store');
-    Route::get('/admin/products', [ProductController::class, 'index'])->name('admin.products');
-    Route::post('/products', [ProductController::class, 'store'])->name('products.store');
+    Route::prefix('admin')->group(function () {
+        Route::get('/product-companies', [ProductCompanyController::class, 'index'])->name('admin.product-companies');
+        Route::post('/product-companies-post', [ProductCompanyController::class, 'store'])->name('admin.product-companies.post');
+        Route::get('/products', [ProductController::class, 'index'])->name('admin.products');
+        Route::post('/products-post', [ProductController::class, 'store'])->name('admin.products.store');
+    });
 });
+
 
