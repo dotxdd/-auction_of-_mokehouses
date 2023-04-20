@@ -15,7 +15,7 @@ class BidsTable extends Migration
     {
         Schema::create('bids', function (Blueprint $table) {
             $table->id('bid_id');
-            $table->unsignedBigInteger('auction_id');
+            $table->uuid('auction_id');
             $table->foreign('auction_id')->references('auction_id')->on('auctions')->onDelete('cascade');
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');

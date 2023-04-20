@@ -14,7 +14,8 @@ class AuctionsTable extends Migration
     public function up()
     {
         Schema::create('auctions', function (Blueprint $table) {
-            $table->id('auction_id');
+            $table->uuid('auction_id');
+            $table->unique('auction_id');
             $table->uuid('product_id')->foreign('product_id')->references('product_id')->on('products');
             $table->foreign('product_id')->references('product_id')->on('products');
             $table->dateTime('date_start');

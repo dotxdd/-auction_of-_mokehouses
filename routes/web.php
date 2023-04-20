@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\RegisterControllers\RegistrationController;
 use App\Http\Controllers\ProductCompanyController;
 use App\Http\Controllers\ProductController;
+use \App\Http\Controllers\AuctionController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -40,6 +41,8 @@ Route::middleware(['admin'])->group(function () {
         Route::post('/product-companies-post', [ProductCompanyController::class, 'store'])->name('admin.product-companies.post');
         Route::get('/products', [ProductController::class, 'index'])->name('admin.products');
         Route::post('/products-post', [ProductController::class, 'store'])->name('admin.products.store');
+        Route::get('/auctions', [AuctionController::class, 'index'])->name('admin.auctions');
+        Route::post('/auctions-post', [AuctionController::class, 'store'])->name('admin.auctions.store');
     });
 });
 
