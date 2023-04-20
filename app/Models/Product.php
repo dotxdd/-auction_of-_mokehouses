@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Product extends Model
 {
     use HasFactory;
-    protected $primaryKey = 'product_id';
+
     protected $fillable = [
         'product_name',
         'product_image',
@@ -19,6 +19,7 @@ class Product extends Model
         'product_currency_price',
         'product_current_price',
         'product_year_of_production',
+        'product_id'
     ];
 
     public function company()

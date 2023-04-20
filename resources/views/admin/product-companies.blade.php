@@ -9,7 +9,7 @@
 
 @section('content')
     <div class="ml-6 mr-6 mt-6">
-        <form method="POST" action="{{ route('admin.product-companies.post') }}">
+        <form method="POST" action="{{ route('admin.auctions.store') }}">
             @csrf
             <label for="company_name" class="text-green-500 font-medium">Company Name:</label>
             <input type="text" name="company_name" id="company_name" class="rounded-md border-blue-500 border-2 p-2 w-full">
