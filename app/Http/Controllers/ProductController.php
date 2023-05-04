@@ -17,11 +17,6 @@ class ProductController extends Controller
         return view('admin.products', compact('products'))->with('companies', $companies);
     }
 
-    public function create()
-    {
-
-
-    }
 
     public function store(Request $request)
     {
@@ -29,16 +24,15 @@ class ProductController extends Controller
         $product->product_name = $request->input('product_name');
         $product->product_id = Uuid::uuid4()->toString();
         $product->product_image = $request->input('product_image');
-        $product->product_color = $request->input('product_color');
         $product->product_company = $request->input('product_company');
+        $product->product_color = $request->input('product_color');
         $product->product_model = $request->input('product_model');
         $product->product_start_price = $request->input('product_start_price');
         $product->product_currency_price = $request->input('product_currency_price');
         $product->product_year_of_production = $request->input('product_year_of_production');
-        $product->save();
+        $product->save(['product_name', 'product_id', 'product_image', 'product_color', 'product_model', 'product_start_price', 'product_currency_price', 'product_year_of_production']);
 
-
-        return redirect()->route('admin.products'); // use the same route name here
+        return redirect()->route('admin.products');
     }
 
     public function edit(Product $product)
@@ -51,8 +45,8 @@ class ProductController extends Controller
     {
         $product->product_name = $request->input('product_name');
         $product->product_image = $request->input('product_image');
-        $product->product_color = $request->input('product_color');
         $product->product_company = $request->input('product_company');
+        $product->product_color = $request->input('product_color');
         $product->product_model = $request->input('product_model');
         $product->product_start_price = $request->input('product_start_price');
         $product->product_currency_price = $request->input('product_currency_price');

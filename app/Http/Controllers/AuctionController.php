@@ -13,7 +13,9 @@ class AuctionController extends Controller
     public function index()
     {
         $auctions = Auction::paginate(10);
-        $product = Product::all();
+        $product = Product::all(['product_id', 'product_name']);
+
+
 
 //, compact('auctions'))->with('product', $product
         return view('admin.auctions', compact('auctions'))->with('product', $product);
@@ -27,6 +29,7 @@ class AuctionController extends Controller
 
     public function store(Request $request)
     {
+
         $auction = new Auction();
         $auction->auction_id = Uuid::uuid4()->toString();
         $auction->product_id = $request->input('product_id');

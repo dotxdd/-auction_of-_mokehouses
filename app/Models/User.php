@@ -2,11 +2,12 @@
 
 namespace App\Models;
 
-// use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use App\Models\Bids;
+use App\Models\Auction;
 
 class User extends Authenticatable
 {
@@ -43,11 +44,25 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
-    /**
-     * Always encrypt the password when it is updated.
-     *
-     * @param $value
-     * @return string
-     */
 
+    /**
+     * Check if the user has bid on a given auction.
+     *
+     * @param Auction $auction
+     * @return bool
+     */
+    public function hasBidOnAuction(Auction $auction)
+    {
+        return $this->bids()->where('auction_id', $auction->id)->exists();
+    }
+
+    /**
+     * Get the bids placed by the user.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function bids()
+    {
+        return $this->hasMany(Bids::class);
+    }
 }

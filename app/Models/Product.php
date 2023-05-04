@@ -21,7 +21,7 @@ class Product extends Model
         'product_year_of_production',
         'product_id'
     ];
-
+   // protected $primaryKey = 'product_id';
     public function company()
     {
         return $this->belongsTo(ProductCompany::class, 'product_company');

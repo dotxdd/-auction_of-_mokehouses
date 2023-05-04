@@ -5,6 +5,8 @@ use App\Http\Controllers\RegisterControllers\RegistrationController;
 use App\Http\Controllers\ProductCompanyController;
 use App\Http\Controllers\ProductController;
 use \App\Http\Controllers\AuctionController;
+use App\Http\Controllers\AuctionsAndBidsController;
+use App\Http\Controllers\MyBidsController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -33,7 +35,11 @@ Route::controller(RegistrationController::class)->group(function() {
 });
 Route::view('/terms-of-use', 'terms.terms_of_use')->name('terms-of-use');
 Route::view('/contact', 'menu.contact')->name('contact');
+Route::get('/account/bids', [MyBidsController::class, 'index'])->name('account.bids');
 Route::view('/team', 'menu.team')->name('team');
+Route::get('/auctions/active', [AuctionsAndBidsController::class, 'index'])->name('auctions.active.index');
+Route::get('/auctions/{auctionId}/bid', [AuctionsAndBidsController::class, 'showBidForm'])->name('auctions.bid');
+Route::post('/auctions/{auctionId}/bid', [AuctionsAndBidsController::class, 'placeBid'])->name('auctions.placeBid');
 
 Route::middleware(['admin'])->group(function () {
     Route::prefix('admin')->group(function () {
