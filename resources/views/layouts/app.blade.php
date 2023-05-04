@@ -41,6 +41,14 @@
                     <a href="{{route('contact')}}" class="{{ (Route::currentRouteName() == 'contact') ? 'text-violet-400' : '' }} block py-2 pl-3 pr-4 text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-white dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">Contact</a>
                 </li>
                 @auth
+
+                    <li>
+                            <a href="{{route('auctions.active.index')}}" class="{{ (Route::currentRouteName() == 'auctions.active.index') ? 'text-violet-400' : '' }} block py-2 pl-3 pr-4 text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-white dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">Auctions & Bids</a>
+                        </li>
+    <li>
+                            <a href="{{route('account.bids')}}" class="{{ (Route::currentRouteName() == 'account.bids') ? 'text-violet-400' : '' }} block py-2 pl-3 pr-4 text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-white dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">My bids</a>
+                        </li>
+
                     @if(auth()->user()->role == 2)
                         <li>  <a href="{{ route('admin.product-companies') }}" class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Product Companies</a> </li>
                         <li>  <a href="{{ route('admin.products') }}" class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Products</a> </li>

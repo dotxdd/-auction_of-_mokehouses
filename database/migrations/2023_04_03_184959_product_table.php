@@ -16,7 +16,7 @@ class ProductTable extends Migration
         Schema::create('products', function (Blueprint $table) {
             $table->uuid('product_id')->primary();
             $table->string('product_name', 100);
-            $table->string('product_image', 50)->nullable();
+            $table->string('product_image', 190)->nullable();
             $table->string('product_color', 30);
             $table->unsignedBigInteger('product_company');
             $table->string('product_model', 50);

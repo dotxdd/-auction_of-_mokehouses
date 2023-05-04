@@ -20,6 +20,7 @@ class ProductCompanyController extends Controller
 
     public function store(Request $request)
     {
+
         $company = new ProductCompany;
         $company->company_name = $request->input('company_name');
         $company->email = $request->input('email');
