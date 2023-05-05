@@ -7,6 +7,10 @@ use App\Http\Controllers\ProductController;
 use \App\Http\Controllers\AuctionController;
 use App\Http\Controllers\AuctionsAndBidsController;
 use App\Http\Controllers\MyBidsController;
+use App\Http\Controllers\UsersController;
+use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\AdminAuctionController;
+use App\Http\Controllers\UserAuctionController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -38,16 +42,21 @@ Route::view('/contact', 'menu.contact')->name('contact');
 Route::get('/account/bids', [MyBidsController::class, 'index'])->name('account.bids');
 Route::view('/team', 'menu.team')->name('team');
 Route::get('/auctions/active', [AuctionsAndBidsController::class, 'index'])->name('auctions.active.index');
+Route::get('/profile/me', [ProfileController::class, 'show'])->name('profile.me');
 Route::get('/auctions/{auctionId}/bid', [AuctionsAndBidsController::class, 'showBidForm'])->name('auctions.bid');
 Route::post('/auctions/{auctionId}/bid', [AuctionsAndBidsController::class, 'placeBid'])->name('auctions.placeBid');
+Route::get('/user/auctions/won', [UserAuctionController::class, 'index'])->name('user.auctions.won');
 
 Route::middleware(['admin'])->group(function () {
     Route::prefix('admin')->group(function () {
+        Route::get('/users', [UsersController::class, 'index'])->name('users.index');
+        Route::get('/users/{user}/impersonate', [UsersController::class, 'impersonate'])->name('users.impersonate');
         Route::get('/product-companies', [ProductCompanyController::class, 'index'])->name('admin.product-companies');
         Route::post('/product-companies-post', [ProductCompanyController::class, 'store'])->name('admin.product-companies.post');
         Route::get('/products', [ProductController::class, 'index'])->name('admin.products');
         Route::post('/products-post', [ProductController::class, 'store'])->name('admin.products.store');
         Route::get('/auctions', [AuctionController::class, 'index'])->name('admin.auctions');
+        Route::get('/auctions/won', [AdminAuctionController::class, 'index'])->name('admin.auctions.won');
         Route::post('/auctions-post', [AuctionController::class, 'store'])->name('admin.auctions.store');
     });
 });

@@ -16,7 +16,11 @@ class Auction extends Model
         'minimal_biding_price',
         'auction_id'
     ];
+    protected $primaryKey = 'auction_id';
 
+    protected $casts = [
+        'auction_id' => 'string'
+    ];
     public function product()
     {
         return $this->belongsTo(Product::class, 'product_id', 'product_id');

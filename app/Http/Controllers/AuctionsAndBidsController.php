@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Carbon\Carbon;
 
 
 class AuctionsAndBidsController
@@ -17,12 +18,14 @@ class AuctionsAndBidsController
 
     public function index()
     {
+        $activeAuctions = Auction::with('product')
+            ->where('date_start', '<',Carbon::now())
+            ->where('date_end', '>', Carbon::now())
+            ->get();
 
-        $activeAuctions = Auction::with('product')->where('date_end', '>', now())->where('date_start', '<', now())->get();
         return view('auctions.index', [
             'auctions' => $activeAuctions
         ]);
-
     }
 
     /**
