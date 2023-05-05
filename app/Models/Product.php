@@ -21,6 +21,12 @@ class Product extends Model
         'product_year_of_production',
         'product_id'
     ];
+    protected $primaryKey = 'product_id';
+    protected $keyType = 'string';
+
+    protected $casts = [
+        'product_id' => 'string'
+    ];
    // protected $primaryKey = 'product_id';
     public function company()
     {

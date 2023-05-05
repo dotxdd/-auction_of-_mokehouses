@@ -27,10 +27,13 @@
                 </button>
 
             </form>
-            <span class="text-2xl">Min. bid: </span><td class="w-full lg:w-auto p-3 text-gray-800 text-center border border-b block lg:table-cell relative lg:static">{{ $auction->minimal_biding_price }}</td>
-          <br />  <span class="text-2xl">Current offer: </span><td class="w-full lg:w-auto p-3 text-gray-800 text-center border border-b block lg:table-cell relative lg:static">{{ $price}}</td>
+            <span class="text-2xl">Min. bid: </span><td class="w-full lg:w-auto p-3 text-gray-800 text-center border border-b block lg:table-cell relative lg:static">{{ $auction->minimal_biding_price }} EUR</td><br />
+            <span class="text-2xl">Min. bid in polish zloty: </span><td class="w-full lg:w-auto p-3 text-gray-800 text-center border border-b block lg:table-cell relative lg:static">{{ number_format(($auction->minimal_biding_price *$exchange),2)}} PLN</td>
+          <br />  <span class="text-2xl">Current offer: </span><td class="w-full lg:w-auto p-3 text-gray-800 text-center border border-b block lg:table-cell relative lg:static">{{ $price}} EUR</td>
+          <br />  <span class="text-2xl">Current offer in polish zloty: </span><td class="w-full lg:w-auto p-3 text-gray-800 text-center border border-b block lg:table-cell relative lg:static">{{number_format(($exchange*$price),2)}} PLN </td>
           <br />  <span class="text-2xl">Prod. name: </span> <td class="w-full lg:w-auto p-3 text-gray-800 text-center border border-b block lg:table-cell relative lg:static">{{ $auction->product->product_name }}</td>
             <br />
+            <br />  <span class="text-2xl">Prod. name: </span> <td class="w-full lg:w-auto p-3 text-gray-800 text-center border border-b block lg:table-cell relative lg:static"><img src="{{ $auction->product->product_image }}"></td>
         </div>
 
     </div>

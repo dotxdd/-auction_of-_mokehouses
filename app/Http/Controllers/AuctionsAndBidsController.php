@@ -1,11 +1,16 @@
 <?php
 
 namespace App\Http\Controllers;
-use App\Models\Bids;
-use Illuminate\Http\Request;
+
 use App\Models\Auction;
-use Illuminate\Support\Facades\DB;
+use App\Models\Bids;
+use App\Providers\Services\ApiNBPService;
+use Exception;
+use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
+use Carbon\Carbon;
 
 
 class AuctionsAndBidsController
@@ -13,29 +18,34 @@ class AuctionsAndBidsController
 
     public function index()
     {
+        $activeAuctions = Auction::with('product')
+            ->where('date_start', '<',Carbon::now())
+            ->where('date_end', '>', Carbon::now())
+            ->get();
 
-        $activeAuctions = Auction::with('product')->where('date_end', '>', now())->where('date_start', '<', now())->get();
         return view('auctions.index', [
             'auctions' => $activeAuctions
         ]);
-
     }
 
     /**
      * Show the bid form for the specified auction.
      *
-     * @param  int  $auctionId
-     * @return \Illuminate\Http\Response
+     * @param int $auctionId
+     * @return Response
      */
     public function showBidForm($auction_id)
     {
 
         $auction = Auction::where('auction_id', $auction_id)->first();
         $highestBid = Bids::where('auction_id', $auction_id)->max('bid_price');
+        $priceEuro = ApiNBPService::getEuroPln();
+
 
         return view('auctions.bid', [
             'auction' => $auction,
-            'price' => $highestBid
+            'price' => $highestBid,
+            'exchange' => $priceEuro
         ]);
     }
 
@@ -83,7 +93,7 @@ class AuctionsAndBidsController
             DB::commit();
 
             return back()->with('success', 'Your bid has been placed.');
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             DB::rollback();
 
             return back()->with('error', 'An error occurred while placing your bid.');
