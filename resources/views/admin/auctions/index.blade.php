@@ -17,6 +17,7 @@
                 <th class="px-4 py-2">Auction ID</th>
                 <th class="px-4 py-2">Product Name</th>
                 <th class="px-4 py-2">Winner</th>
+                <th class="px-4 py-2">Winner e-mail</th>
                 <th class="px-4 py-2">Price</th>
             </tr>
             </thead>
@@ -24,9 +25,10 @@
             @foreach($auctions as $auction)
                 <tr class="{{ $loop->odd ? 'bg-white' : 'bg-gray-100' }}">
                     <td class="border px-4 py-2">{{ $auction->auction_id }}</td>
-                    <td class="border px-4 py-2">{{ $auction->product->name }}</td>
-                    <td class="border px-4 py-2">{{ $auction->bids->last()->user->name }}</td>
-                    <td class="border px-4 py-2">{{ $auction->getHighestBidAttribute() }}</td>
+                    <td class="border px-4 py-2">{{ $auction->product->product_name }}</td>
+                    <td class="border px-4 py-2">{{ $auction->highest_bid_user->name}}</td>
+                    <td class="border px-4 py-2">{{ $auction->highest_bid_user->email}}</td>
+                    <td class="border px-4 py-2">{{ $auction->highest_bid_user->bid_price }}</td>
                 </tr>
             @endforeach
             </tbody>

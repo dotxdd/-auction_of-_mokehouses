@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Casts\UuidCast;
 
 class Auction extends Model
 {
@@ -18,9 +19,14 @@ class Auction extends Model
     ];
     protected $primaryKey = 'auction_id';
 
-    protected $casts = [
-        'auction_id' => 'string'
-    ];
+    public function getCastType($key)
+    {
+        if ($key === 'auction_id') {
+            return 'string'; // Set the correct data type for auction_id
+        }
+
+        return parent::getCastType($key);
+    }
     public function product()
     {
         return $this->belongsTo(Product::class, 'product_id', 'product_id');
