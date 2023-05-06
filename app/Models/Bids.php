@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Casts\UuidCast;
 
 class Bids extends Model
 {
@@ -14,6 +15,14 @@ class Bids extends Model
         'bid_price',
         'date_of_bid'
     ];
+    public function getCastType($key)
+    {
+        if ($key === 'auction_id') {
+            return 'string'; // Set the correct data type for auction_id
+        }
+
+        return parent::getCastType($key);
+    }
 
     public function auction()
     {
