@@ -3,6 +3,8 @@
     <title>App Name - @yield('title')</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Uncial+Antiqua">
+
     @vite('resources/css/app.css')
     <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.4/flowbite.min.js"></script>
     @yield('head_script')
